@@ -9,16 +9,7 @@ namespace DAL
 {
     public class RepositoryBase<TModel> : IRepositoryBase<TModel> where TModel : ModelBase
     {
-        private readonly DbContext _dbContext;
-        private readonly DbSet<TModel> _table;
-
-        public RepositoryBase(DbContext dbContext)
-        {
-            _dbContext = dbContext;
-            _table = _dbContext.Set<TModel>();
-        }
-
-        private DbSet<TModel> GetTable()
+                private DbSet<TModel> GetTable()
         {
             return GetDbContext().Set<TModel>();
         }
@@ -81,7 +72,7 @@ namespace DAL
 
         public async Task Save()
         {
-            await _dbContext.SaveChangesAsync();
+            await GetDbContext().SaveChangesAsync();
         }
     }
 }
