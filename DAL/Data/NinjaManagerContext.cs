@@ -4,11 +4,19 @@ namespace DAL.Data
 {
     public class NinjaManagerContext : DbContext
     {
-        public NinjaManagerContext(DbContextOptions<NinjaManagerContext> options) : base(options)
+        // DbSets
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=localhost;Database=NinjaManager;Trusted_Connection=True;");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
         }
-
-        // DbSet
     }
 }

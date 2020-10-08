@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C75F3924-5077-46FB-ABC2-B2F30FD903CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{C75F3924-5077-46FB-ABC2-B2F30FD903CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayer", "LogicLayer\LogicLayer.csproj", "{93F91E2A-C44F-44B0-BC15-5C61BE1401A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NinjaManager", "NinjaManager\NinjaManager.csproj", "{15C24734-21B6-4FD8-9915-D27688AFFF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaManager", "NinjaManager\NinjaManager.csproj", "{15C24734-21B6-4FD8-9915-D27688AFFF15}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{39354E96-E8C0-416E-9DDF-AC63E754AE38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{39354E96-E8C0-416E-9DDF-AC63E754AE38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{C75F3924-5077-46FB-ABC2-B2F30FD903CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C75F3924-5077-46FB-ABC2-B2F30FD903CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C75F3924-5077-46FB-ABC2-B2F30FD903CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93F91E2A-C44F-44B0-BC15-5C61BE1401A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93F91E2A-C44F-44B0-BC15-5C61BE1401A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93F91E2A-C44F-44B0-BC15-5C61BE1401A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93F91E2A-C44F-44B0-BC15-5C61BE1401A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15C24734-21B6-4FD8-9915-D27688AFFF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15C24734-21B6-4FD8-9915-D27688AFFF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15C24734-21B6-4FD8-9915-D27688AFFF15}.Release|Any CPU.ActiveCfg = Release|Any CPU

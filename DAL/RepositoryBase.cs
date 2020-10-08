@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DAL.Data;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ModelLayer;
@@ -18,34 +18,44 @@ namespace DAL
             _table = _dbContext.Set<TModel>();
         }
 
-        public async void Add(IEnumerable<TModel> itemList)
+        private DbSet<TModel> GetTable()
         {
-            await _table.AddRangeAsync(itemList);
+            return GetDbContext().Set<TModel>();
         }
 
-        public async void Add(TModel item)
+        private DbContext GetDbContext()
         {
-            await _table.AddAsync(item);
+            return new NinjaManagerContext();
+        }
+
+        public void Add(IEnumerable<TModel> itemList)
+        {
+            GetTable().AddRangeAsync(itemList);
+        }
+
+        public void Add(TModel item)
+        {
+            GetTable().AddAsync(item);
         }
 
         public void Delete(IEnumerable<TModel> itemList)
         {
-            _table.RemoveRange(itemList);
+            GetTable().RemoveRange(itemList);
         }
 
         public void Delete(TModel item)
         {
-            _table.Remove(item);
+            GetTable().Remove(item);
         }
 
         public async Task<IEnumerable<TModel>> Get()
         {
-            return await _table.ToListAsync();
+            return await GetTable().ToListAsync();
         }
 
         public async Task<TModel> Get(int id)
         {
-            return await _table.FindAsync(id);
+            return await GetTable().FindAsync(id);
         }
 
         public async Task<IEnumerable<TModel>> Get(IEnumerable<int> ids)
@@ -61,12 +71,12 @@ namespace DAL
 
         public void Update(TModel item)
         {
-            _table.Update(item);
+            GetTable().Update(item);
         }
 
         public void Update(IEnumerable<TModel> itemList)
         {
-            _table.UpdateRange(itemList);
+            GetTable().UpdateRange(itemList);
         }
 
         public async Task Save()

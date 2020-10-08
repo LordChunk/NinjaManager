@@ -1,5 +1,3 @@
-using System;
-
 namespace NinjaManager.Models
 {
     public class ErrorViewModel
