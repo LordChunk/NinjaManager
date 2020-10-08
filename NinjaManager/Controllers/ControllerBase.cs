@@ -1,8 +1,4 @@
-﻿using DAL;
-using DAL.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ModelLayer;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace NinjaManager.Controllers
 {
