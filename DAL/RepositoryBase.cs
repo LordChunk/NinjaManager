@@ -9,7 +9,7 @@ namespace DAL
 {
     public class RepositoryBase<TModel> : IRepositoryBase<TModel> where TModel : ModelBase
     {
-                private DbSet<TModel> GetTable()
+        private DbSet<TModel> GetTable()
         {
             return GetDbContext().Set<TModel>();
         }
