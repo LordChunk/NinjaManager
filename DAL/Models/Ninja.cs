@@ -1,41 +1,30 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace DAL.Models
 {
     public class Ninja : ModelBase
     {
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public int Gold { get; set; }
-        public Armour Head { get; set; }
-        public Armour Necklace { get; set; }
-        public Armour Hand { get; set; }
-        public Armour Chest { get; set; }
-        public Armour Ring { get; set; }
-        public Armour Feet { get; set; }
+
+        public virtual ICollection<NinjaArmour> EquippedArmour { get; set; }
 
         public void SetArmour(Armour armour)
         {
-            switch (armour.ArmourType)
-            {
-                case ArmourEnum.Head:
-                    this.Head = armour;
-                    break;
-                case ArmourEnum.Chest:
-                    this.Chest = armour;
-                    break;
-                case ArmourEnum.Feet:
-                    this.Feet = armour;
-                    break;
-                case ArmourEnum.Hands:
-                    this.Hand = armour;
-                    break;
-                case ArmourEnum.Necklace:
-                    this.Necklace = armour;
-                    break;
-                case ArmourEnum.Ring:
-                    this.Ring = armour;
-                    break;
-            }
+            // Dit kan nie https://github.com/avans-prg5/SuperSushi/blob/master/SuperSushi.Data/MenuRepositorySql.cs#L54
+            // moet waarschijnlijk in repo voor ninja 
+            
+            // Finds all items that are not of the current armour type (i.e. if adding helmet it removes all helmets from the list)
+            //var newArmourList = EquippedArmour.Where(currentArmour => currentArmour.Armour.ArmourType != armour.ArmourType).ToList();
+            
+            //newArmourList.Add(armour);
+
+            //EquippedArmour = newArmourList;
         }
     }
 }
