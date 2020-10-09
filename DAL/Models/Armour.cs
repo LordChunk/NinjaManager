@@ -6,11 +6,11 @@ namespace DAL.Models
 {
     public class Armour
     {
-        private string Name { get; set; }
+        public string Name { get; set; }
         public int Strength { get; set; }
-        private int Agility { get; set; }
-        private int Intelligence { get; set; }
-        private int Price { get; set; }
-        private ArmourEnum ArmourType { get; set; }
+        public int Agility { get; set; }
+        public int Intelligence { get; set; }
+        public int Price { get; set; }
+        public ArmourEnum ArmourType { get; set; }
     }
 }
