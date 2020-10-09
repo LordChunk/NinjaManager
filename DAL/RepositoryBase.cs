@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using DAL.Data;
 using DAL.Interfaces;
+using DAL.Models;
 using Microsoft.EntityFrameworkCore;
-using ModelLayer;
 
 namespace DAL
 {
