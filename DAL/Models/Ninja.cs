@@ -13,7 +13,7 @@ namespace DAL.Models
         public Armour Ring { get; set; }
         public Armour Feet { get; set; }
 
-        public void setArmour(Armour armour)
+        public void SetArmour(Armour armour)
         {
             switch (armour.ArmourType)
             {
