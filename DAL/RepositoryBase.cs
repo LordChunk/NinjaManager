@@ -39,24 +39,24 @@ namespace DAL
             GetTable().Remove(item);
         }
 
-        public async Task<IEnumerable<TModel>> Get()
+        public IEnumerable<TModel> Get()
         {
-            return await GetTable().ToListAsync();
+            return GetTable();
         }
 
-        public async Task<TModel> Get(int id)
+        public TModel Get(int id)
         {
-            return await GetTable().FindAsync(id);
+            return GetTable().Find(id);
         }
 
-        public async Task<IEnumerable<TModel>> Get(IEnumerable<int> ids)
+        public IEnumerable<TModel> Get(IEnumerable<int> ids)
         {
             var itemList = new List<TModel>();
             foreach (var id in ids)
             {
-                itemList.Add(await Get(id));
+                itemList.Add(Get(id));
             }
-
+            
             return itemList;
         }
 
@@ -70,9 +70,9 @@ namespace DAL
             GetTable().UpdateRange(itemList);
         }
 
-        public async Task Save()
+        public void Save()
         {
-            await GetDbContext().SaveChangesAsync();
+            GetDbContext().SaveChanges();
         }
     }
 }

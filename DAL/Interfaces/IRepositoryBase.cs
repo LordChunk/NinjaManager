@@ -8,9 +8,9 @@ namespace DAL.Interfaces
     {
         public void Add(IEnumerable<TModel> itemList);
         public void Add(TModel item);
-        public Task<IEnumerable<TModel>> Get();
-        public Task<TModel> Get(int id);
-        public Task<IEnumerable<TModel>> Get(IEnumerable<int> ids);
+        public IEnumerable<TModel> Get();
+        public TModel Get(int id);
+        public IEnumerable<TModel> Get(IEnumerable<int> ids);
         public void Update(IEnumerable<TModel> itemList);
         public void Update(TModel item);
         public void Delete(IEnumerable<TModel> itemList);
