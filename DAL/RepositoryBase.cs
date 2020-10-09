@@ -18,14 +18,14 @@ namespace DAL
             return new NinjaManagerContext();
         }
 
-        public void Add(IEnumerable<TModel> itemList)
-        {
-            GetTable().AddRangeAsync(itemList);
-        }
-
         public void Add(TModel item)
         {
             GetTable().AddAsync(item);
+        }
+        
+        public void Add(IEnumerable<TModel> itemList)
+        {
+            GetTable().AddRangeAsync(itemList);
         }
 
         public void Delete(IEnumerable<TModel> itemList)
