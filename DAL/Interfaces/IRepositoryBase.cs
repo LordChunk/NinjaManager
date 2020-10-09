@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DAL.Models;
+﻿using DAL.Models;
+using System.Collections.Generic;
 
 namespace DAL.Interfaces
 {

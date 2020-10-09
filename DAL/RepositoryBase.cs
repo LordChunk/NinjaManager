@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using DAL.Data;
 using DAL.Interfaces;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using DAL.Data;
 
 namespace DAL
 {
