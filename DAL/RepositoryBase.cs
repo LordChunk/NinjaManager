@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DAL.Data;
+﻿using DAL.Data;
 using DAL.Interfaces;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DAL
 {
