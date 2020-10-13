@@ -1,51 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Interfaces;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using DAL.Data;
 
 namespace DAL
 {
     public class RepositoryBase<TModel> : IRepositoryBase<TModel> where TModel : ModelBase
     {
-        private DbSet<TModel> GetTable()
+        private readonly DbContext _dbContext;
+        private readonly DbSet<TModel> _table;
+
+        public RepositoryBase(DbContext dbContext)
         {
-            return GetDbContext().Set<TModel>();
+            _dbContext = dbContext;
+            _table = _dbContext.Set<TModel>();
         }
 
-        private DbContext GetDbContext()
+        public void Add(IEnumerable<TModel> itemList)
         {
-            return new NinjaManagerContext();
+            _table.AddRangeAsync(itemList);
         }
 
         public void Add(TModel item)
         {
-            GetTable().AddAsync(item);
-        }
-        
-        public void Add(IEnumerable<TModel> itemList)
-        {
-            GetTable().AddRangeAsync(itemList);
+            _table.AddAsync(item);
         }
 
         public void Delete(IEnumerable<TModel> itemList)
         {
-            GetTable().RemoveRange(itemList);
+            _table.RemoveRange(itemList);
         }
 
         public void Delete(TModel item)
         {
-            GetTable().Remove(item);
+            _table.Remove(item);
         }
 
         public IEnumerable<TModel> Get()
         {
-            return GetTable();
+            return _table;
         }
 
         public TModel Get(int id)
         {
-            return GetTable().Find(id);
+            return _table.Find(id);
         }
 
         public IEnumerable<TModel> Get(IEnumerable<int> ids)
@@ -55,23 +55,23 @@ namespace DAL
             {
                 itemList.Add(Get(id));
             }
-            
+
             return itemList;
         }
 
         public void Update(TModel item)
         {
-            GetTable().Update(item);
+            _table.Update(item);
         }
 
         public void Update(IEnumerable<TModel> itemList)
         {
-            GetTable().UpdateRange(itemList);
+            _table.UpdateRange(itemList);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            GetDbContext().SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

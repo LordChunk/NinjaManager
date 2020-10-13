@@ -1,6 +1,7 @@
 using DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,7 +21,12 @@ namespace NinjaManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<NinjaManagerContext>();
+            services.AddDbContextPool<NinjaManagerContext>(
+                options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString(
+                        "Server=(localdb)\\MSSQLLocalDB;Database=NinjaManager;Trusted_Connection=True;"));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

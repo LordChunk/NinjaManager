@@ -10,14 +10,6 @@ namespace DAL.Data
         public DbSet<Armour> Armour { get; set; }
         public DbSet<NinjaArmour> NinjaArmour { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=NinjaManager;Trusted_Connection=True;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // [START NINJA - ARMOUR MANY TO MANY]
