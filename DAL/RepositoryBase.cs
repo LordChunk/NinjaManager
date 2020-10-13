@@ -69,9 +69,9 @@ namespace DAL
             _table.UpdateRange(itemList);
         }
 
-        public async Task Save()
+        public void Save()
         {
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChangesAsync();
         }
     }
 }
