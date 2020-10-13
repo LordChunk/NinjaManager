@@ -1,26 +1,25 @@
-﻿@model DAL.Models.Ninja
+﻿@model DAL.Models.NinjaArmour
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Create</h1>
 
-<h4>Ninja</h4>
+<h4>NinjaArmour</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="NinjaId" class="control-label"></label>
+                <select asp-for="NinjaId" class ="form-control" asp-items="ViewBag.NinjaId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Gold" class="control-label"></label>
-                <input asp-for="Gold" class="form-control" />
-                <span asp-validation-for="Gold" class="text-danger"></span>
+                <label asp-for="ArmourId" class="control-label"></label>
+                <select asp-for="ArmourId" class ="form-control" asp-items="ViewBag.ArmourId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -32,3 +31,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
