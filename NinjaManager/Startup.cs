@@ -22,11 +22,8 @@ namespace NinjaManager
         {
             services.AddControllersWithViews();
             services.AddDbContextPool<NinjaManagerContext>(
-                options =>
-                {
-                    options.UseSqlServer(Configuration.GetConnectionString(
-                        "Server=(localdb)\\MSSQLLocalDB;Database=NinjaManager;Trusted_Connection=True;"));
-                });
+                options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=NinjaManager;Trusted_Connection=True;")
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

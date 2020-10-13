@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using DAL;
+using DAL.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NinjaManager.Models;
@@ -9,9 +11,11 @@ namespace NinjaManager.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, NinjaManagerContext dbContext)
         {
             _logger = logger;
+
+            new NinjaRepository(dbContext);
         }
 
         public IActionResult Index()

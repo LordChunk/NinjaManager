@@ -10,6 +10,10 @@ namespace DAL.Data
         public DbSet<Armour> Armour { get; set; }
         public DbSet<NinjaArmour> NinjaArmour { get; set; }
 
+        public NinjaManagerContext(DbContextOptions options) : base(options)
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // [START NINJA - ARMOUR MANY TO MANY]
