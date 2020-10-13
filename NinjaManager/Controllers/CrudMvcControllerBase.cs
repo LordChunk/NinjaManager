@@ -35,7 +35,7 @@ namespace NinjaManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual IActionResult Create(TModel model)
+        public virtual IActionResult Create([FromForm] TModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -57,7 +57,7 @@ namespace NinjaManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual IActionResult Edit(int id, TModel model)
+        public virtual IActionResult Edit(int id, [FromForm] TModel model)
         {
             if (id != model.Id) return NotFound();
             if (!ModelState.IsValid) return View(model);

@@ -10,9 +10,5 @@ namespace NinjaManager.Controllers
         public NewNinjasController(NinjaManagerContext context) : base(context)
         {
         }
-
-        public override IActionResult Create([Bind("Name,Gold,Id")] Ninja model) => base.Create(model);
-
-        public override IActionResult Edit(int id, [Bind("Name,Gold,Id")] Ninja model) => base.Edit(id, model);
     }
 }
