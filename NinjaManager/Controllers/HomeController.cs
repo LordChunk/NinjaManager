@@ -14,8 +14,6 @@ namespace NinjaManager.Controllers
         public HomeController(ILogger<HomeController> logger, NinjaManagerContext dbContext)
         {
             _logger = logger;
-
-            new NinjaRepository(dbContext);
         }
 
         public IActionResult Index()
