@@ -71,7 +71,7 @@ namespace DAL
 
         public void Save()
         {
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }
     }
 }
