@@ -27,10 +27,13 @@ namespace NinjaManager
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, NinjaManagerContext context)
         {
             if (env.IsDevelopment())
             {
+                // Automatically creates and updates database
+                context.Database.Migrate();
+
                 app.UseDeveloperExceptionPage();
             }
             else
