@@ -25,7 +25,7 @@ namespace DAL
 
         public void Delete(TModel item) => _table.Remove(item);
 
-        public IEnumerable<TModel> Get() => _table;
+        public IEnumerable<TModel> Get() => _table.Include(n => n.Armour).Include(n => n.Ninja);
 
         //public TModel Get(int ninjaId, int armourId)
         //{
