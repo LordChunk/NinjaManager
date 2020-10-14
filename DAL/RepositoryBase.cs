@@ -1,7 +1,8 @@
-using System.Collections.Generic;
 using DAL.Interfaces;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DAL
 {
@@ -16,60 +17,24 @@ namespace DAL
             _table = _dbContext.Set<TModel>();
         }
 
-        public void Add(IEnumerable<TModel> itemList)
-        {
-            _table.AddRangeAsync(itemList);
-        }
+        public void Add(IEnumerable<TModel> itemList) => _table.AddRangeAsync(itemList);
 
-        public void Add(TModel item)
-        {
-            _table.AddAsync(item);
-        }
+        public void Add(TModel item) => _table.AddAsync(item);
 
-        public void Delete(IEnumerable<TModel> itemList)
-        {
-            _table.RemoveRange(itemList);
-        }
+        public void Delete(IEnumerable<TModel> itemList) => _table.RemoveRange(itemList);
 
-        public void Delete(TModel item)
-        {
-            _table.Remove(item);
-        }
+        public void Delete(TModel item) => _table.Remove(item);
 
-        public IEnumerable<TModel> Get()
-        {
-            return _table;
-        }
+        public IEnumerable<TModel> Get() => _table;
 
-        public TModel Get(int id)
-        {
-            return _table.Find(id);
-        }
+        public TModel Get(int id) => _table.Find(id);
 
-        public IEnumerable<TModel> Get(IEnumerable<int> ids)
-        {
-            var itemList = new List<TModel>();
-            foreach (var id in ids)
-            {
-                itemList.Add(Get(id));
-            }
+        public IEnumerable<TModel> Get(IEnumerable<int> ids) => ids.Select(Get);
 
-            return itemList;
-        }
+        public void Update(TModel item) => _table.Update(item);
 
-        public void Update(TModel item)
-        {
-            _table.Update(item);
-        }
+        public void Update(IEnumerable<TModel> itemList) => _table.UpdateRange(itemList);
 
-        public void Update(IEnumerable<TModel> itemList)
-        {
-            _table.UpdateRange(itemList);
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
+        public void Save() => _dbContext.SaveChanges();
     }
 }
