@@ -14,5 +14,6 @@ namespace DAL.Interfaces
         public void Update(TModel item);
         public void Delete(IEnumerable<TModel> itemList);
         public void Delete(TModel item);
+        public void Save();
     }
 }
