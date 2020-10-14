@@ -8,11 +8,11 @@ namespace NinjaManager.Controllers
 {
     public class NinjasController : Controller
     {
-        private readonly NinjaRepository _ninjaRepository;
+        private readonly RepositoryBase<Ninja> _ninjaRepository;
 
         public NinjasController(NinjaManagerContext context)
         {
-            _ninjaRepository = new NinjaRepository(context);
+            _ninjaRepository = new RepositoryBase<Ninja>(context);
         }
 
         // GET: Ninjas
