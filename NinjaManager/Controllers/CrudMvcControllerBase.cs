@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NinjaManager.Controllers
 {
-    public abstract class CrudMvcControllerBase<TModel> : ControllerBase, ICrudMvcControllerBase<TModel> where TModel : ModelBase
+    public abstract class CrudMvcControllerBase<TModel> : Controller, ICrudMvcControllerBase<TModel> where TModel : ModelBase
     {
         private readonly RepositoryBase<TModel> _repository;
 
