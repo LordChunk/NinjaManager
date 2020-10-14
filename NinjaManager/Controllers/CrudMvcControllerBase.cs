@@ -10,23 +10,15 @@ namespace NinjaManager.Controllers
     {
         private readonly RepositoryBase<TModel> _repository;
 
-        protected CrudMvcControllerBase(DbContext context)
-        {
-            _repository = new RepositoryBase<TModel>(context);
-        }
+        protected CrudMvcControllerBase(DbContext context) => _repository = new RepositoryBase<TModel>(context);
 
-        public IActionResult Index()
-        {
-            return View(_repository.Get());
-        }
+        public IActionResult Index() => View(_repository.Get());
 
         public IActionResult Details(int id)
         {
             var model = _repository.Get(id);
-            if (model == null)
-            {
-                return NotFound();
-            }
+
+            if (model == null) return NotFound();
 
             return View(model);
         }
@@ -48,10 +40,8 @@ namespace NinjaManager.Controllers
         public IActionResult Edit(int id)
         {
             var model = _repository.Get(id);
-            if (model == null)
-            {
-                return NotFound();
-            }
+            if (model == null) return NotFound();
+
             return View(model);
         }
 
@@ -69,14 +59,9 @@ namespace NinjaManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ModelExists(model.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!ModelExists(model.Id)) return NotFound();
+
+                throw;
             }
             return RedirectToAction(nameof(Index));
         }
@@ -84,7 +69,6 @@ namespace NinjaManager.Controllers
         public IActionResult Delete(int id)
         {
             var model = _repository.Get(id);
-
             if (model == null) return NotFound();
 
             return View(model);
