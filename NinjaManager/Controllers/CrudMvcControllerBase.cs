@@ -81,7 +81,6 @@ namespace NinjaManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Ninjas/Delete/5
         public IActionResult Delete(int id)
         {
             var model = _repository.Get(id);
@@ -91,7 +90,6 @@ namespace NinjaManager.Controllers
             return View(model);
         }
 
-        // POST: Ninjas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
