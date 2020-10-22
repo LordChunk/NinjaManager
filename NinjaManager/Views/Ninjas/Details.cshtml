@@ -1,4 +1,4 @@
-﻿@model DAL.Models.Ninja
+﻿@model NinjaViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,18 +10,67 @@
     <h4>Ninja</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Gold)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Gold)
         </dd>
+    </dl>
+
+    <h5>Cumulative armour statistics</h5>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Strength
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalStrength
+        </dd>
+        <dt class="col-sm-2">
+            Agility
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalAgility
+        </dd>
+        <dt class="col-sm-2">
+            Intelligence
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalIntelligence
+        </dd>
+        <dt class="col-sm-2">
+            Armour Value
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalArmourValue
+        </dd>
+    </dl>
+
+
+    <h5>Armour</h5>
+    <dl class="row">
+        @foreach (DAL.Models.Armour armour in Model.AllArmour)
+        {
+            <dt class="col-sm-2">
+                Type:
+            </dt>
+            <dd class="col-sm-10">
+                @armour.ArmourType
+            </dd>
+
+            <dt class="col-sm-2">
+                Name:
+            </dt>
+            <dd class="col-sm-10">
+                @armour.Name
+            </dd>
+        }
     </dl>
 </div>
 <div>

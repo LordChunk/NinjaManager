@@ -8,13 +8,13 @@ namespace NinjaManager.Controllers
 {
     public abstract class CrudMvcControllerBase<TModel> : Controller, ICrudMvcControllerBase<TModel> where TModel : ModelBase
     {
-        private readonly RepositoryBase<TModel> _repository;
+        public readonly RepositoryBase<TModel> _repository;
 
         protected CrudMvcControllerBase(DbContext context) => _repository = new RepositoryBase<TModel>(context);
 
-        public IActionResult Index() => View(_repository.Get());
+        public virtual IActionResult Index() => View(_repository.Get());
 
-        public IActionResult Details(int id)
+        public virtual IActionResult Details(int id)
         {
             var model = _repository.Get(id);
 
@@ -23,7 +23,7 @@ namespace NinjaManager.Controllers
             return View(model);
         }
 
-        public IActionResult Create() => View();
+        public virtual IActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -37,7 +37,7 @@ namespace NinjaManager.Controllers
         }
 
 
-        public IActionResult Edit(int id)
+        public virtual IActionResult Edit(int id)
         {
             var model = _repository.Get(id);
             if (model == null) return NotFound();
@@ -66,7 +66,7 @@ namespace NinjaManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(int id)
         {
             var model = _repository.Get(id);
             if (model == null) return NotFound();
@@ -76,7 +76,7 @@ namespace NinjaManager.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public virtual IActionResult DeleteConfirmed(int id)
         {
             var model = _repository.Get(id);
             _repository.Delete(model);
