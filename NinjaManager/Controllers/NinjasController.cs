@@ -11,8 +11,6 @@ namespace NinjaManager.Controllers
 {
     public class NinjasController : CrudMvcControllerBase<Ninja>
     {
-        // ReSharper disable once SuggestBaseTypeForParameter
-        private readonly RepositoryBase<Armour> armourRepository;
         private readonly NinjaManagerContext _context;
         public NinjasController(NinjaManagerContext context) : base(context)
         {
