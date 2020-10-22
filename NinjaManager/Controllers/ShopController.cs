@@ -29,7 +29,7 @@ namespace NinjaManager.Controllers
         // GET: Shop/Details/5
         public IActionResult Details(int? id)
         {
-            throw new NoNullAllowedException();
+            throw new NotImplementedException();
 
             if (id == null)
             {
