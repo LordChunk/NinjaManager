@@ -8,7 +8,6 @@ namespace DAL.Data
         // DbSets
         public DbSet<Ninja> Ninja { get; set; }
         public DbSet<Armour> Armour { get; set; }
-        public DbSet<NinjaArmour> NinjaArmour { get; set; }
 
         public NinjaManagerContext(DbContextOptions options) : base(options)
         {
