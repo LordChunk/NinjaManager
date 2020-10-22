@@ -11,15 +11,15 @@ namespace NinjaManager.Controllers
 {
     public class NinjasController : CrudMvcControllerBase<Ninja>
     {
-        private readonly NinjaManagerContext _context;
+        private readonly NinjaRepository ninjaRepository;
         public NinjasController(NinjaManagerContext context) : base(context)
         {
-            _context = context;
+            ninjaRepository = new NinjaRepository(context);
         }
 
         public override IActionResult Details(int id)
         {
-            var ninja = _context.Ninja.Include(n => n.EquippedArmour).ThenInclude(na => na.Armour).FirstOrDefault(n => n.Id == id);
+            var ninja = ninjaRepository.GetDetailed(id);
             var AllArmour = ninja.EquippedArmour.Select(na => na.Armour).ToList();
 
             var ninjaModel = new NinjaViewModel
