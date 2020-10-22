@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DAL.Models.NinjaArmour>
+﻿
+@using DAL.Models
+@model ShopViewModel 
 
 @{
     ViewData["Title"] = "Index";
@@ -7,36 +9,21 @@
 
 <h1>Shop</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ninja)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Armour)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ninja.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Armour.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if (Model.SelectedNinja != null)
+{
+    <p>The selected ninja is: @Model.SelectedNinja.Name</p>
+    <p>@Model.SelectedNinja.Name has @Model.SelectedNinja.Gold gold.</p>
 }
-    </tbody>
-</table>
+
+<div class="form-group">
+    @foreach (Armour armour in Model.BuyAbleArmour)
+    {
+        <div>
+            <p>@armour.Name</p>
+            @if (Model.SelectedNinja != null)
+            {
+                <input type="submit" value="Buy armour" class="btn btn-primary" asp-action="BuyArmour"/>
+            }
+        </div>
+    }
+</div>

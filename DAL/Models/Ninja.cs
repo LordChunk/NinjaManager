@@ -13,5 +13,9 @@ namespace DAL.Models
 
         public virtual ICollection<NinjaArmour> EquippedArmour { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
