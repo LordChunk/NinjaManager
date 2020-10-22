@@ -12,13 +12,13 @@ namespace NinjaManager.Controllers
 {
     public class ShopController : Controller
     {
-        private readonly NinjaArmourRepository<NinjaArmour> _ninjaArmourRepository;
+        private readonly NinjaArmourRepository _ninjaArmourRepository;
         private readonly RepositoryBase<Ninja> _ninjaRepository;
         private readonly RepositoryBase<Armour> _armourRepository;
 
         public ShopController(NinjaManagerContext context)
         {
-            _ninjaArmourRepository = new NinjaArmourRepository<NinjaArmour>(context);
+            _ninjaArmourRepository = new NinjaArmourRepository(context);
             _ninjaRepository = new RepositoryBase<Ninja>(context);
             _armourRepository = new RepositoryBase<Armour>(context);
         }

@@ -6,28 +6,28 @@ using System.Linq;
 
 namespace DAL
 {
-    public class NinjaArmourRepository<TModel> where TModel : NinjaArmour
+    public class NinjaArmourRepository
     {
         private readonly DbContext _dbContext;
-        private readonly DbSet<TModel> _table;
+        private readonly DbSet<NinjaArmour> _table;
 
         public NinjaArmourRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
-            _table = _dbContext.Set<TModel>();
+            _table = _dbContext.Set<NinjaArmour>();
         }
 
-        public void Add(IEnumerable<TModel> itemList) => _table.AddRangeAsync(itemList);
+        public void Add(IEnumerable<NinjaArmour> itemList) => _table.AddRangeAsync(itemList);
 
-        public void Add(TModel item) => _table.AddAsync(item);
+        public void Add(NinjaArmour item) => _table.AddAsync(item);
 
-        public void Delete(IEnumerable<TModel> itemList) => _table.RemoveRange(itemList);
+        public void Delete(IEnumerable<NinjaArmour> itemList) => _table.RemoveRange(itemList);
 
-        public void Delete(TModel item) => _table.Remove(item);
+        public void Delete(NinjaArmour item) => _table.Remove(item);
 
-        public IEnumerable<TModel> Get() => _table.Include(n => n.Armour).Include(n => n.Ninja);
+        public IEnumerable<NinjaArmour> Get() => _table.Include(n => n.Armour).Include(n => n.Ninja);
 
-        //public TModel Get(int ninjaId, int armourId)
+        //public NinjaArmour Get(int ninjaId, int armourId)
         //{
         //    throw new NotImplementedException();
         //}
@@ -42,9 +42,9 @@ namespace DAL
             return _table.Where(na => na.ArmourId == armour.Id).Select(na => na.Ninja);
         }
 
-        public void Update(TModel item) => _table.Update(item);
+        public void Update(NinjaArmour item) => _table.Update(item);
 
-        public void Update(IEnumerable<TModel> itemList) => _table.UpdateRange(itemList);
+        public void Update(IEnumerable<NinjaArmour> itemList) => _table.UpdateRange(itemList);
 
         public void Save() => _dbContext.SaveChanges();
     }
