@@ -41,9 +41,7 @@
     </tr>
     </thead>
     <tbody>
-    @Model.BuyAbleArmour.GroupBy(e => e.ArmourType);
-
-    @foreach (Armour armour in Model.BuyAbleArmour)
+    @foreach (Armour armour in Model.BuyAbleArmour.OrderBy(e => e.ArmourType))
     {
         <tr>
             <td>
