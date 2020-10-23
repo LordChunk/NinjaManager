@@ -17,21 +17,22 @@ namespace NinjaManager.Controllers
         private readonly NinjaArmourRepository _ninjaArmourRepository;
         private readonly NinjaRepository _ninjaRepository;
         private readonly RepositoryBase<Armour> _armourRepository;
-        private ShopViewModel shopViewModel;
 
         public ShopController(NinjaManagerContext context)
         {
             _ninjaArmourRepository = new NinjaArmourRepository(context);
             _ninjaRepository = new NinjaRepository(context);
             _armourRepository = new RepositoryBase<Armour>(context);
-            shopViewModel = new ShopViewModel();
         }
 
         [HttpGet]
         public IActionResult Index(int ninjaId)
         {
-            shopViewModel.SelectedNinja = _ninjaRepository.GetDetailed(ninjaId);
-            shopViewModel.BuyAbleArmour = _armourRepository.Get();
+            var shopViewModel = new ShopViewModel
+            {
+                SelectedNinja = _ninjaRepository.GetDetailed(ninjaId),
+                BuyAbleArmour = _armourRepository.Get()
+            };
 
             var equippedArmour = shopViewModel.SelectedNinja.EquippedArmour.Select(na => na.Armour);
 
@@ -39,11 +40,45 @@ namespace NinjaManager.Controllers
             return View(shopViewModel);
         }
 
-        [HttpPost]
-        public IActionResult BuyArmour(int ninjaId, int armourId)
+        public IActionResult BuyArmour([FromRoute]int id, int ninjaId)
         {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
 
-            return View("Index",shopViewModel);
+            var selectedNinja = _ninjaRepository.GetDetailed(ninjaId);
+
+            var justBoughtArmour = _armourRepository.Get(id);
+
+            var equippedArmour = selectedNinja.EquippedArmour.Select(na => na.Armour);
+
+            foreach (var armour in equippedArmour)
+            {
+                if (armour.ArmourType == justBoughtArmour.ArmourType)
+                {
+                    selectedNinja.Gold = selectedNinja.Gold + armour.Price;
+                    _ninjaRepository.Update(selectedNinja);
+                    _ninjaArmourRepository.Delete(new NinjaArmour
+                    {
+                        ArmourId = armour.Id,
+                        NinjaId = selectedNinja.Id
+                    });
+                }
+            }
+
+            _ninjaArmourRepository.Add(new NinjaArmour
+            {
+                ArmourId = justBoughtArmour.Id,
+                NinjaId = selectedNinja.Id
+            });
+
+            selectedNinja.Gold = selectedNinja.Gold - justBoughtArmour.Price;
+            _ninjaRepository.Update(selectedNinja);
+
+            _ninjaArmourRepository.Save();
+            _ninjaRepository.Save();
+            return RedirectToAction(nameof(Index), new { ninjaId = ninjaId });
         }
     }
 }
