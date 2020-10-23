@@ -34,6 +34,9 @@ namespace NinjaManager
                 // Automatically creates and updates database
                 context.Database.Migrate();
 
+
+                NinjaManagerContext.InsertTestData(context);
+
                 app.UseDeveloperExceptionPage();
             }
             else
