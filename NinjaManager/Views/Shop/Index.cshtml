@@ -15,15 +15,59 @@
     <p>@Model.SelectedNinja.Name has @Model.SelectedNinja.Gold gold.</p>
 }
 
-<div class="form-group">
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Strength
+        </th>
+        <th>
+             model.Agility
+        </th>
+        <th>
+            Intelligence
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            ArmourType
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @Model.BuyAbleArmour.GroupBy(e => e.ArmourType);
+
     @foreach (Armour armour in Model.BuyAbleArmour)
     {
-    <div>
-        <p>@armour.Name</p>
-        @if (Model.SelectedNinja != null)
-        {
-            <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.SelectedNinja.Id" >Buy</a>
-        }
-    </div>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => armour.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => armour.Strength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => armour.Agility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => armour.Intelligence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => armour.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => armour.ArmourType)
+            </td>
+            <td>
+                <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.SelectedNinja.Id">Buy</a>
+            </td>
+        </tr>
     }
-</div>
+    </tbody>
+</table>
