@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using DAL;
 using DAL.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
