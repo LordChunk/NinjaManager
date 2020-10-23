@@ -11,27 +11,27 @@ namespace NinjaManager.Controllers
 {
     public class NinjasController : CrudMvcControllerBase<Ninja>
     {
-        private readonly NinjaRepository ninjaRepository;
+        private readonly NinjaRepository _ninjaRepository;
         public NinjasController(NinjaManagerContext context) : base(context)
         {
-            ninjaRepository = new NinjaRepository(context);
+            _ninjaRepository = new NinjaRepository(context);
         }
 
         public override IActionResult Details(int id)
         {
-            var ninja = ninjaRepository.GetDetailed(id);
-            var AllArmour = ninja.EquippedArmour.Select(na => na.Armour).ToList();
+            var ninja = _ninjaRepository.GetDetailed(id);
+            var allArmour = ninja.EquippedArmour.Select(na => na.Armour).ToList();
 
             var ninjaModel = new NinjaViewModel
             {
                 Name = ninja.Name,
                 Id = ninja.Id,
-                AllArmour = AllArmour,
+                AllArmour = allArmour,
 
-                TotalStrength = AllArmour.Sum(armour => armour.Strength),
-                TotalAgility = AllArmour.Sum(armour => armour.Agility),
-                TotalIntelligence = AllArmour.Sum(armour => armour.Intelligence),
-                TotalArmourValue = AllArmour.Sum(armour => armour.Price),
+                TotalStrength = allArmour.Sum(armour => armour.Strength),
+                TotalAgility = allArmour.Sum(armour => armour.Agility),
+                TotalIntelligence = allArmour.Sum(armour => armour.Intelligence),
+                TotalArmourValue = allArmour.Sum(armour => armour.Price),
             };
 
             return View(ninjaModel);

@@ -7,16 +7,16 @@ namespace DAL
 {
     public class NinjaRepository : RepositoryBase<Ninja>
     {
-        private readonly NinjaManagerContext _dbcontext;
+        private readonly NinjaManagerContext _dbContext;
 
-        public NinjaRepository(NinjaManagerContext dbcontext) : base(dbcontext)
+        public NinjaRepository(NinjaManagerContext dbContext) : base(dbContext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbContext;
         }
 
         public Ninja GetDetailed(int id)
         {
-            return _dbcontext.Ninja.Include(n => n.EquippedArmour).ThenInclude(na => na.Armour).FirstOrDefault(n => n.Id == id);
+            return _dbContext.Ninja.Include(n => n.EquippedArmour).ThenInclude(na => na.Armour).FirstOrDefault(n => n.Id == id);
         }
     }
 }

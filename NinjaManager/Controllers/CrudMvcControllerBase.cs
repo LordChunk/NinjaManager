@@ -8,7 +8,7 @@ namespace NinjaManager.Controllers
 {
     public abstract class CrudMvcControllerBase<TModel> : Controller, ICrudMvcControllerBase<TModel> where TModel : ModelBase
     {
-        public readonly RepositoryBase<TModel> _repository;
+        private readonly RepositoryBase<TModel> _repository;
 
         protected CrudMvcControllerBase(DbContext context) => _repository = new RepositoryBase<TModel>(context);
 
