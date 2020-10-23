@@ -52,12 +52,12 @@ namespace NinjaManager.Controllers
             {
                 if (armour.ArmourType == justBoughtArmour.ArmourType)
                 {
-                    selectedNinja.Gold = selectedNinja.Gold + armour.Price;
+                    selectedNinja.Gold += armour.Price;
                     _ninjaRepository.Update(selectedNinja);
                     _ninjaArmourRepository.Delete(new NinjaArmour
                     {
                         ArmourId = armour.Id,
-                        NinjaId = selectedNinja.Id
+                        NinjaId = ninjaId
                     });
                 }
             }
@@ -73,6 +73,11 @@ namespace NinjaManager.Controllers
 
             _ninjaArmourRepository.Save();
             _ninjaRepository.Save();
+            return RedirectToAction(nameof(Index), new { ninjaId = ninjaId });
+        }
+
+        public IActionResult SellArmour([FromRoute] int id, int ninjaId)
+        {
             return RedirectToAction(nameof(Index), new { ninjaId = ninjaId });
         }
     }

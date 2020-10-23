@@ -70,6 +70,7 @@
             <dd class="col-sm-10">
                 @armour.Name
             </dd>
+            <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
         }
     </dl>
 </div>
