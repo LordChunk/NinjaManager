@@ -18,12 +18,12 @@
 <div class="form-group">
     @foreach (Armour armour in Model.BuyAbleArmour)
     {
-        <div>
-            <p>@armour.Name</p>
-            @if (Model.SelectedNinja != null)
-            {
-                <input type="submit" value="Buy armour" class="btn btn-primary" asp-action="BuyArmour"/>
-            }
-        </div>
+    <div>
+        <p>@armour.Name</p>
+        @if (Model.SelectedNinja != null)
+        {
+            <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.SelectedNinja.Id" >Buy</a>
+        }
+    </div>
     }
 </div>
