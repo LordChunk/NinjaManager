@@ -54,28 +54,72 @@
 
 
     <h5>Armour</h5>
-    <dl class="row">
-        @foreach (DAL.Models.Armour armour in Model.AllArmour)
-        {
-            <dt class="col-sm-2">
-                Type:
-            </dt>
-            <dd class="col-sm-10">
-                @armour.ArmourType
-            </dd>
 
-            <dt class="col-sm-2">
-                Name:
-            </dt>
-            <dd class="col-sm-10">
-                @armour.Name
-            </dd>
-            <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
-        }
+    <dl class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Strength
+                </th>
+                <th>
+                    model.Agility
+                </th>
+                <th>
+                    Intelligence
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    ArmourType
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (DAL.Models.Armour armour in Model.AllArmour)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.Strength)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.Agility)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.Intelligence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => armour.ArmourType)
+                    </td>
+                    <td>
+                        <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </dl>
 </div>
+
+
+
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-<a asp-controller="Shop" asp-action="Index" asp-route-ninjaId="@Model.Id">Go to the shop to buy new armour!</a>
+<div>
+    <a asp-controller="Shop" asp-action="Index" asp-route-ninjaId="@Model.Id">Go to the shop to buy new armour!</a>
+</div>
