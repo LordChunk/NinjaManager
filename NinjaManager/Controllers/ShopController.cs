@@ -73,9 +73,6 @@ namespace NinjaManager.Controllers
                 // Check if ninja already has this armour type
                 if (armour.ArmourType != justBoughtArmour.ArmourType) continue;
 
-                selectedNinja.Gold += armour.Price;
-                _ninjaRepository.Update(selectedNinja);
-
                 // Sell old armour
                 DeleteNinjaArmour(ninjaId, armour.Id);
 
