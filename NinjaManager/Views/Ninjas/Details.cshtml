@@ -103,7 +103,7 @@
                         @Html.DisplayFor(modelItem => armour.ArmourType)
                     </td>
                     <td>
-                        <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
+                        <a asp-controller="Shop" asp-action="SellArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
                     </td>
                 </tr>
             }

@@ -74,7 +74,9 @@ namespace NinjaManager.Controllers
                     _ninjaArmourRepository.Delete(new NinjaArmour
                     {
                         ArmourId = armour.Id,
-                        NinjaId = ninjaId
+                        NinjaId = ninjaId,
+                        Ninja = selectedNinja,
+                        Armour = armour,
                     });
                     _ninjaArmourRepository.Save();
                     _ninjaRepository.Save();
@@ -98,7 +100,25 @@ namespace NinjaManager.Controllers
 
         public IActionResult SellArmour([FromRoute] int id, int ninjaId)
         {
+            DeleteNinjaArmour(ninjaId, id);
+
             return RedirectToAction(nameof(Index), new { ninjaId = ninjaId });
+        }
+
+        private void DeleteNinjaArmour(int ninjaId, int armourId)
+        {
+            _ninjaArmourRepository.Delete(new NinjaArmour
+            {
+                ArmourId = armourId,
+                NinjaId = ninjaId,
+            });
+            _ninjaArmourRepository.Save();
+
+            var ninja = _ninjaRepository.Get(ninjaId);
+            ninja.Gold += _armourRepository.Get(armourId).Price;
+
+            _ninjaRepository.Update(ninja);
+            _ninjaRepository.Save();
         }
     }
 }
