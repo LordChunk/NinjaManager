@@ -2,7 +2,6 @@
 using System.Linq;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DAL.Data
 {

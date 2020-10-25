@@ -2,9 +2,7 @@
 using DAL.Data;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NinjaManager.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace NinjaManager.Controllers
