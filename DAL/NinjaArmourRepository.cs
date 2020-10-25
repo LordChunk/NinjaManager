@@ -40,9 +40,9 @@ namespace DAL
             return _table.Where(na => na.NinjaId == ninja.Id).Select(na => na.Armour);
         }
 
-        public IEnumerable<Ninja> GetNinjaFromArmour(Armour armour)
+        public IEnumerable<Ninja> GetNinjaFromArmour(int armourId)
         {
-            return _table.Where(na => na.ArmourId == armour.Id).Select(na => na.Ninja);
+            return _table.Where(na => na.ArmourId == armourId).Select(na => na.Ninja);
         }
 
         public void Update(NinjaArmour item) => _table.Update(item);
