@@ -21,7 +21,7 @@ namespace NinjaManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int ninjaId)
+        public IActionResult Index(int ninjaId, int ?selectedArmour)
         {
             var shopViewModel = new ShopViewModel
             {
@@ -29,9 +29,26 @@ namespace NinjaManager.Controllers
                 BuyAbleArmour = _armourRepository.Get()
             };
 
+            if (selectedArmour != null)
+            {
+                shopViewModel.SelectedArmour = selectedArmour switch
+                {
+                    0 => ArmourEnum.Head,
+                    1 => ArmourEnum.Necklace,
+                    2 => ArmourEnum.Hands,
+                    3 => ArmourEnum.Chest,
+                    4 => ArmourEnum.Feet,
+                    5 => ArmourEnum.Ring,
+                    _ => shopViewModel.SelectedArmour
+                };
+            }
+
             var equippedArmour = shopViewModel.SelectedNinja.EquippedArmour.Select(na => na.Armour);
 
             shopViewModel.BuyAbleArmour = shopViewModel.BuyAbleArmour.Where(a => !equippedArmour.Contains(a));
+
+            if (selectedArmour != null) shopViewModel.BuyAbleArmour = shopViewModel.BuyAbleArmour.Where(a => a.ArmourType == shopViewModel.SelectedArmour);
+
             return View(shopViewModel);
         }
 
