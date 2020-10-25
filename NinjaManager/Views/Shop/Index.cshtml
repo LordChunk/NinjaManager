@@ -1,7 +1,7 @@
 ﻿
 @using DAL.Models
 @using DAL
-@model ShopViewModel 
+@model ShopViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,79 +14,81 @@
 {
     <p>The selected ninja is: @Model.SelectedNinja.Name</p>
     <p>@Model.SelectedNinja.Name has @Model.SelectedNinja.Gold gold.</p>
+    <a asp-controller="Ninjas" asp-action="Details" asp-route-id="@Model.SelectedNinja.Id">View this ninja</a>
 }
 
 <form asp-action="Index" method="get" asp-route-ninjaId="@Model.SelectedNinja.Id">
     <div class="form-group">
         <label for="selectedArmour" class="control-label"></label>
-        <select name="selectedArmour"  asp-items="Html.GetEnumSelectList<ArmourEnum>()" class="form-control"></select>
+        <select name="selectedArmour" asp-items="Html.GetEnumSelectList<ArmourEnum>()" class="form-control"></select>
         <span asp-validation-for="SelectedArmour" class="text-danger"></span>
     </div>
-    
-    <input type="hidden" name="ninjaId" value="@Model.SelectedNinja.Id"/>
+
+    <input type="hidden" name="ninjaId" value="@Model.SelectedNinja.Id" />
+
 
     <div class="form-group">
         <input type="submit" value="Select armour type" class="btn btn-primary" />
+
+        <a asp-action="Index" asp-route-ninjaId="@Model.SelectedNinja.Id" class="btn btn-primary">
+            Reset Selection
+        </a>
     </div>
 </form>
 
-<div class="form-group">
-    <a asp-action="Index" asp-route-ninjaId="@Model.SelectedNinja.Id" class="btn btn-primary">
-        Reset Selection
-    </a>
-</div>
+
 
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Strength
-        </th>
-        <th>
-             model.Agility
-        </th>
-        <th>
-            Intelligence
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            ArmourType
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Strength
+            </th>
+            <th>
+                model.Agility
+            </th>
+            <th>
+                Intelligence
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                ArmourType
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (Armour armour in Model.BuyAbleArmour.OrderBy(e => e.ArmourType))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => armour.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => armour.Strength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => armour.Agility)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => armour.Intelligence)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => armour.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => armour.ArmourType)
-            </td>
-            <td>
-                <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.SelectedNinja.Id">Buy</a>
-            </td>
-        </tr>
-    }
+        @foreach (Armour armour in Model.BuyAbleArmour.OrderBy(e => e.ArmourType))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.Strength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.Agility)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.Intelligence)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => armour.ArmourType)
+                </td>
+                <td>
+                    <a asp-controller="Shop" asp-action="BuyArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.SelectedNinja.Id">Buy</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
