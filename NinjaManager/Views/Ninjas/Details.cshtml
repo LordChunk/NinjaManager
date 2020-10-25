@@ -8,6 +8,7 @@
 
 <div>
     <h4>Ninja</h4>
+
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -23,6 +24,9 @@
             @Html.DisplayFor(model => model.Gold)
         </dd>
     </dl>
+    <hr />
+    <img src="https://cdn.discordapp.com/attachments/486511616343670785/769920290967781416/ninja.png" alt="Very sexy ninja" />
+    <hr />
 
     <h5>Cumulative armour statistics</h5>
     <dl class="row">
@@ -58,55 +62,55 @@
     <dl class="row">
         <table class="table">
             <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Strength
-                </th>
-                <th>
-                    model.Agility
-                </th>
-                <th>
-                    Intelligence
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    ArmourType
-                </th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Strength
+                    </th>
+                    <th>
+                        Agility
+                    </th>
+                    <th>
+                        Intelligence
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        ArmourType
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (DAL.Models.Armour armour in Model.AllArmour)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.Strength)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.Agility)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.Intelligence)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => armour.ArmourType)
-                    </td>
-                    <td>
-                        <a asp-controller="Shop" asp-action="SellArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
-                    </td>
-                </tr>
-            }
+                @foreach (var armour in Model.AllArmour)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.Strength)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.Agility)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.Intelligence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => armour.ArmourType)
+                        </td>
+                        <td>
+                            <a asp-controller="Shop" asp-action="SellArmour" asp-route-id="@armour.Id" asp-route-ninjaId="@Model.Id">sell</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </dl>
