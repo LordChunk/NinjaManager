@@ -22,7 +22,11 @@ namespace DAL
 
         public void Delete(IEnumerable<NinjaArmour> itemList) => _table.RemoveRange(itemList);
 
-        public void Delete(NinjaArmour item) => _table.Remove(item);
+        public void Delete(NinjaArmour item)
+        {
+            _dbContext.Entry<NinjaArmour>(item).State = EntityState.Deleted;
+            _table.Remove(item);
+        } 
 
         public IEnumerable<NinjaArmour> Get() => _table.Include(n => n.Armour).Include(n => n.Ninja);
 

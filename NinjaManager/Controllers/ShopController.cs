@@ -59,6 +59,9 @@ namespace NinjaManager.Controllers
                         ArmourId = armour.Id,
                         NinjaId = ninjaId
                     });
+                    _ninjaArmourRepository.Save();
+                    _ninjaRepository.Save();
+                    break;
                 }
             }
 
