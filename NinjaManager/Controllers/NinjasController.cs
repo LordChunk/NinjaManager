@@ -27,6 +27,7 @@ namespace NinjaManager.Controllers
                 Name = ninja.Name,
                 Id = ninja.Id,
                 AllArmour = allArmour,
+                Gold = ninja.Gold,
 
                 TotalStrength = allArmour.Sum(armour => armour.Strength),
                 TotalAgility = allArmour.Sum(armour => armour.Agility),
