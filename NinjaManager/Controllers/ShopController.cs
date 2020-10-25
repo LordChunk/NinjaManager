@@ -65,23 +65,22 @@ namespace NinjaManager.Controllers
 
             var equippedArmour = selectedNinja.EquippedArmour.Select(na => na.Armour);
 
+            // Dispose of detailed relations to prevent issues when deleting related data
+            selectedNinja = _ninjaRepository.Get(ninjaId);
+
             foreach (var armour in equippedArmour)
             {
-                if (armour.ArmourType == justBoughtArmour.ArmourType)
-                {
-                    selectedNinja.Gold += armour.Price;
-                    _ninjaRepository.Update(selectedNinja);
-                    _ninjaArmourRepository.Delete(new NinjaArmour
-                    {
-                        ArmourId = armour.Id,
-                        NinjaId = ninjaId,
-                        Ninja = selectedNinja,
-                        Armour = armour,
-                    });
-                    _ninjaArmourRepository.Save();
-                    _ninjaRepository.Save();
-                    break;
-                }
+                // Check if ninja already has this armour type
+                if (armour.ArmourType != justBoughtArmour.ArmourType) continue;
+
+                selectedNinja.Gold += armour.Price;
+                _ninjaRepository.Update(selectedNinja);
+
+                // Sell old armour
+                DeleteNinjaArmour(ninjaId, armour.Id);
+
+                _ninjaRepository.Save();
+                break;
             }
 
             _ninjaArmourRepository.Add(new NinjaArmour
@@ -90,7 +89,7 @@ namespace NinjaManager.Controllers
                 NinjaId = selectedNinja.Id
             });
 
-            selectedNinja.Gold = selectedNinja.Gold - justBoughtArmour.Price;
+            selectedNinja.Gold -= justBoughtArmour.Price;
             _ninjaRepository.Update(selectedNinja);
 
             _ninjaArmourRepository.Save();

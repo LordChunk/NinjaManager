@@ -16,7 +16,13 @@ namespace DAL
 
         public Ninja GetDetailed(int id)
         {
-            return _dbContext.Ninja.Include(n => n.EquippedArmour).ThenInclude(na => na.Armour).FirstOrDefault(n => n.Id == id);
+            var returnValue = _dbContext.Ninja.Include(n => n.EquippedArmour).ThenInclude(na => na.Armour).FirstOrDefault(n => n.Id == id);
+
+            // Set state to detached to prevent issues when updating related tables 
+            if (returnValue != null)
+                _dbContext.Entry(returnValue).State = EntityState.Detached;
+
+            return returnValue;
         }
     }
 }
